@@ -1,7 +1,7 @@
 import React, { useEffect, useReducer } from 'react';
 import axios from 'axios';
 import uuid from 'uuid/v4'
-import { mergeCountriesStats, getData, distributePercentage } from './utils/covid19Util';
+import { mergeCountriesStats, getData, enrichCountriesStats } from './utils/covid19Util';
 import { isNotEmptyArray } from './utils/isEmptyUtil';
 import './App.css';
 import Header from './Header';
@@ -21,13 +21,20 @@ const reducer = (prevState, updatedProperty) => ({
   ...updatedProperty,
 });
 
-const renderCountry = ({ country, cases, cures, deaths }) => {
-  const percentages = distributePercentage({ country, cases, cures, deaths });
-  const { casesPercent, curesPercent, deathsPercent } = percentages;
+const renderCountry = country => {
+  const {
+    country: countryName,
+    cases,
+    cures,
+    deaths,
+    casesPercent,
+    curesPercent,
+    deathsPercent,
+  } = country;
   return (
     <li key={uuid()} className="country" >
       <div>
-        <h2 className="heading--country">{country}</h2>
+        <h2 className="heading--country">{countryName}</h2>
         <div className="display-flex stats">
           <span className="stat stat--cases">{cases}</span>
           <span className="stat stat--cures">{cures}</span>
@@ -46,14 +53,8 @@ const renderCountry = ({ country, cases, cures, deaths }) => {
 const renderStats = stats => {
   const output = [];
   stats.forEach(st => {
-    const {
-      country,
-      cases,
-      cures,
-      deaths,
-    } = st;
     output.push(
-      renderCountry({ country, cases, cures, deaths })
+      renderCountry(st)
     )
   })
   return output;
@@ -87,11 +88,11 @@ const App = () => {
               isNotEmptyArray(deaths)
             ) {
               setState({
-                stats: mergeCountriesStats({
+                stats: enrichCountriesStats(mergeCountriesStats({
                   cases,
                   cures,
                   deaths,
-                }),
+                })),
                 loading: false
               });
             }

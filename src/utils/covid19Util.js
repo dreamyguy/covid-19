@@ -108,7 +108,7 @@ export const mergeCountriesStats = ({ cases, cures, deaths }) => {
   return output;
 };
 
-export const enrichCountriesStats = ({ countries }) => {
+export const enrichCountriesStats = countries => {
   const output = [];
   countries && isNotEmptyArray(countries) && countries.forEach(co => {
     const { country, cases, cures, deaths/*, population*/ } = co;
@@ -129,20 +129,4 @@ export const enrichCountriesStats = ({ countries }) => {
     });
   });
   return output;
-};
-
-export const distributePercentage = ({
-  cases,
-  cures,
-  deaths,
-}) => {
-  const total = cases + cures + deaths;
-  const casesPercent = cases * 100 / total;
-  const curesPercent = cures * 100 / total;
-  const deathsPercent = deaths * 100 / total;
-  return {
-    casesPercent,
-    curesPercent,
-    deathsPercent
-  }
 };
