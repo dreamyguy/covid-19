@@ -12,6 +12,11 @@ export const getCountries = countries => {
   return mergeCountries(allCountries);
 };
 
+export const valueDividedBy = ({
+  value,
+  dividedBy,
+}) => value / dividedBy;
+
 export const parseCSV = (data, type) => csvtojsonV2({
     output: "json"
   })
@@ -103,18 +108,41 @@ export const mergeCountriesStats = ({ cases, cures, deaths }) => {
   return output;
 };
 
+export const enrichCountriesStats = ({ countries }) => {
+  const output = [];
+  countries && isNotEmptyArray(countries) && countries.forEach(co => {
+    const { country, cases, cures, deaths/*, population*/ } = co;
+    const total = cases + cures + deaths;
+    output.push({
+      country,
+      cases,
+      cures,
+      deaths,
+      // population,
+      casesPercent: cases * 100 / total,
+      curesPercent: cures * 100 / total,
+      deathsPercent: deaths * 100 / total,
+      // casesPerCapita: cases * 100 / population,
+      // curesPerCapita: cures * 100 / population,
+      // deathsPerCapita: deaths * 100 / population,
+      total,
+    });
+  });
+  return output;
+};
+
 export const distributePercentage = ({
   cases,
   cures,
   deaths,
 }) => {
   const total = cases + cures + deaths;
-  const casesPc = cases * 100 / total;
-  const curesPc = cures * 100 / total;
-  const deathsPc = deaths * 100 / total;
+  const casesPercent = cases * 100 / total;
+  const curesPercent = cures * 100 / total;
+  const deathsPercent = deaths * 100 / total;
   return {
-    casesPc,
-    curesPc,
-    deathsPc
+    casesPercent,
+    curesPercent,
+    deathsPercent
   }
 };

@@ -14,26 +14,67 @@ ul {
 li {
   list-style: none;
 }
-h1 {
-  margin: 0 0 10px;
+h1,
+h2,
+h3 {
+  margin: 0;
 }
 h2 {
-  font-size: 28px;
-  margin-top: 0;
+  font-size: 18px;
+}
+
+/* GRID - only what's needed! */
+
+.grid {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.col-12 {
+  width: 100%;
+}
+.col-10 {
+  width: 83.33%;
+}
+.col-9 {
+  width: 75%;
+}
+.col-8 {
+  width: 66.66%;
+}
+.col-6 {
+  width: 50%;
+}
+.col-4 {
+  width: 33.33%;
+}
+.col-3 {
+  width: 25%;
+}
+.col-2 {
+  width: 16.66%;
 }
 
 /* APP SPECIFIC */
 
 .header {
+  align-items: center;
+  justify-content: space-between;
   min-height: 78px;
   width: 100%;
-  padding: 5px 0 12px;
+  padding: 5px 10px 10px;
   background-color: white;
   position: fixed;
   -webkit-box-shadow: 0px -8px 39px 8px rgba(0,0,0,0.2);
   -moz-box-shadow: 0px -8px 39px 8px rgba(0,0,0,0.2);
   box-shadow: 0px -8px 39px 8px rgba(0,0,0,0.2);
 }
+.heading--site {
+  margin-bottom: 5px;
+}
+.settings {}
+.button {}
+.button--settings {}
 .legends {
   width: 140px;
   justify-content: space-between;
@@ -56,7 +97,7 @@ h2 {
   margin-bottom: 5px;
 }
 .legend__label {
-  font-size: 12px;
+  font-size: 14px;
 }
 .app {
   padding-top: 120px;
@@ -66,24 +107,28 @@ h2 {
   padding: 0 20px;
 }
 .country {
-  margin-bottom: 20px;
-  padding: 20px;
+  margin-bottom: 10px;
+  padding: 10px;
   background-color: #efefef;
+}
+.heading--country {
+  font-size: 24px;
+  margin-bottom: 10px;
 }
 .stats {
   justify-content: space-evenly;
 }
 .stats {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 .stat {
-  padding: 5px 10px;
+  padding: 5px 8px;
   border-radius: 20%;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 500;
 }
 .percentages {
-  height: 20px;
+  height: 18px;
 }
 .percentage {}
 .stat--cases,
@@ -109,6 +154,9 @@ h2 {
 
 .display-flex {
   display: flex;
+}
+.flex-direction-column {
+  flex-direction: column;
 }
 .align-center {
   text-align: center;

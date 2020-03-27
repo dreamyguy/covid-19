@@ -2,7 +2,7 @@
 
 The worst stats here are, in order of importance:
 
-- Number of deaths in relation to number of cases
+- Number of deaths in relation to total affected (cases & cured)
 - Number of deaths per capita
 - Number of cases per capita
 - Number of cases

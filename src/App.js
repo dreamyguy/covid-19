@@ -23,11 +23,11 @@ const reducer = (prevState, updatedProperty) => ({
 
 const renderCountry = ({ country, cases, cures, deaths }) => {
   const percentages = distributePercentage({ country, cases, cures, deaths });
-  const { casesPc, curesPc, deathsPc } = percentages;
+  const { casesPercent, curesPercent, deathsPercent } = percentages;
   return (
     <li key={uuid()} className="country" >
       <div>
-        <h2>{country}</h2>
+        <h2 className="heading--country">{country}</h2>
         <div className="display-flex stats">
           <span className="stat stat--cases">{cases}</span>
           <span className="stat stat--cures">{cures}</span>
@@ -35,9 +35,9 @@ const renderCountry = ({ country, cases, cures, deaths }) => {
         </div>
       </div>
       <div className="display-flex percentages">
-        <div className="percentage percentage--cases" style={{ width: `${casesPc}%` }} />
-        <div className="percentage percentage--cures" style={{ width: `${curesPc}%` }} />
-        <div className="percentage percentage--deaths" style={{ width: `${deathsPc}%` }} />
+        <div className="percentage percentage--cases" style={{ width: `${casesPercent}%` }} />
+        <div className="percentage percentage--cures" style={{ width: `${curesPercent}%` }} />
+        <div className="percentage percentage--deaths" style={{ width: `${deathsPercent}%` }} />
       </div>
     </li>
   );
