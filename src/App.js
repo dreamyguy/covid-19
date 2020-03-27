@@ -1,7 +1,7 @@
 import React, { useEffect, useReducer } from 'react';
 import axios from 'axios';
 import uuid from 'uuid/v4'
-import { mergeCountriesStats, getData, enrichCountriesStats } from './utils/covid19Util';
+import { mergeCountriesStats, getData, enrichCountriesStats, sortCountriesBy } from './utils/covid19Util';
 import { isNotEmptyArray } from './utils/isEmptyUtil';
 import './App.css';
 import Header from './Header';
@@ -13,6 +13,7 @@ const deathsData = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/ma
 const initialState = {
   stats: [],
   errorStats: '',
+  sortBy: 'deathsPercent',
   loading:  false,
 };
 
@@ -21,7 +22,7 @@ const reducer = (prevState, updatedProperty) => ({
   ...updatedProperty,
 });
 
-const renderCountry = country => {
+const renderCountry = (country, rank) => {
   const {
     country: countryName,
     cases,
@@ -34,7 +35,7 @@ const renderCountry = country => {
   return (
     <li key={uuid()} className="country" >
       <div>
-        <h2 className="heading--country">{countryName}</h2>
+        <h2 className="heading--country">{rank}. {countryName}</h2>
         <div className="display-flex stats">
           <span className="stat stat--cases">{cases}</span>
           <span className="stat stat--cures">{cures}</span>
@@ -52,9 +53,9 @@ const renderCountry = country => {
 
 const renderStats = stats => {
   const output = [];
-  stats.forEach(st => {
+  stats.forEach((st, i) => {
     output.push(
-      renderCountry(st)
+      renderCountry(st, i + 1)
     )
   })
   return output;
@@ -111,6 +112,7 @@ const App = () => {
   const {
     stats,
     loading,
+    sortBy,
   } = state;
 
   return (
@@ -122,7 +124,11 @@ const App = () => {
         }
         {!loading && stats && isNotEmptyArray(stats) &&
           <ul className="countries">
-            {renderStats(stats)}
+            {renderStats(sortCountriesBy({
+              countries: stats,
+              sortBy,
+              mode: 'desc',
+            }))}
           </ul>
         }
       </div>

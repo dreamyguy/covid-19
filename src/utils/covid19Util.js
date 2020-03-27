@@ -17,6 +17,21 @@ export const valueDividedBy = ({
   dividedBy,
 }) => value / dividedBy;
 
+export const sortCountriesBy = ({ countries, sortBy, mode }) => {
+  if (
+    countries &&
+    isNotEmptyArray(countries)
+  ) {
+    if (mode === 'desc') {
+      countries.sort((a, b) => b[sortBy] - a[sortBy]);
+    } else {
+      countries.sort((a, b) => a[sortBy] - b[sortBy]);
+    }
+    return countries;
+  }
+  return console.log(`[sortCountriesBy]: 'countries' (${countries}) is not an array or is empty`);
+}
+
 export const parseCSV = (data, type) => csvtojsonV2({
     output: "json"
   })
