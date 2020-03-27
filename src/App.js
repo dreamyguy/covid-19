@@ -4,6 +4,7 @@ import uuid from 'uuid/v4'
 import { mergeCountriesStats, getData, distributePercentage } from './utils/covid19Util';
 import { isNotEmptyArray } from './utils/isEmptyUtil';
 import './App.css';
+import Header from './Header';
 
 const casesData = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv';
 const curesData = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv';
@@ -112,17 +113,19 @@ const App = () => {
   } = state;
 
   return (
-    <div className="App">
-      <h1>COVID-19</h1>
-      {loading &&
-        <h3>Loading...</h3>
-      }
-      {!loading && stats && isNotEmptyArray(stats) &&
-        <ul className="countries">
-          {renderStats(stats)}
-        </ul>
-      }
-    </div>
+    <>
+      <Header />
+      <div className="app align-center">
+        {loading &&
+          <h3>Loading...</h3>
+        }
+        {!loading && stats && isNotEmptyArray(stats) &&
+          <ul className="countries">
+            {renderStats(stats)}
+          </ul>
+        }
+      </div>
+    </>
   );
 }
 
