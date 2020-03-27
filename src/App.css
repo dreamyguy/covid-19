@@ -36,3 +36,66 @@
     transform: rotate(360deg);
   }
 }
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%,
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+li {
+  list-style: none;
+}
+h2 {
+  margin-top: 0;
+}
+
+.display-flex {
+  display: flex;
+}
+
+.countries {
+  max-width: 1400px;
+  padding: 0 20px;
+}
+
+.country {
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #efefef;
+}
+
+.stats {
+  justify-content: space-evenly;
+}
+.stats {
+  margin-bottom: 20px;
+}
+.stat {
+  padding: 5px 10px;
+  border-radius: 20%;
+}
+.percentages {
+  height: 20px;
+}
+.percentage {}
+.stat--cases,
+.percentage--cases {
+  background-color: gold;
+  color: black;
+}
+.stat--cures,
+.percentage--cures {
+  background-color: green;
+  color: white;
+}
+.stat--deaths,
+.percentage--deaths {
+  background-color: red;
+  color: white;
+}

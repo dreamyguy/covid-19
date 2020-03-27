@@ -1,7 +1,7 @@
 import React, { useEffect, useReducer } from 'react';
 import axios from 'axios';
 import uuid from 'uuid/v4'
-import { mergeCountriesStats, getData } from './utils/covid19Util';
+import { mergeCountriesStats, getData, distributePercentage } from './utils/covid19Util';
 import { isNotEmptyArray } from './utils/isEmptyUtil';
 import './App.css';
 
@@ -20,6 +20,28 @@ const reducer = (prevState, updatedProperty) => ({
   ...updatedProperty,
 });
 
+const renderCountry = ({ country, cases, cures, deaths }) => {
+  const percentages = distributePercentage({ country, cases, cures, deaths });
+  const { casesPc, curesPc, deathsPc } = percentages;
+  return (
+    <li key={uuid()} className="country" >
+      <div>
+        <h2>{country}</h2>
+        <div className="display-flex stats">
+          <span className="stat stat--cases">{cases}</span>
+          <span className="stat stat--cures">{cures}</span>
+          <span className="stat stat--deaths">{deaths}</span>
+        </div>
+      </div>
+      <div className="display-flex percentages">
+        <div className="percentage percentage--cases" style={{ width: `${casesPc}%` }} />
+        <div className="percentage percentage--cures" style={{ width: `${curesPc}%` }} />
+        <div className="percentage percentage--deaths" style={{ width: `${deathsPc}%` }} />
+      </div>
+    </li>
+  );
+}
+
 const renderStats = stats => {
   const output = [];
   stats.forEach(st => {
@@ -30,12 +52,7 @@ const renderStats = stats => {
       deaths,
     } = st;
     output.push(
-      <li key={uuid()}>
-        <p>Country: {country}</p>
-        <p>Cases: {cases}</p>
-        <p>Cures: {cures}</p>
-        <p>Deaths: {deaths}</p>
-      </li>
+      renderCountry({ country, cases, cures, deaths })
     )
   })
   return output;
@@ -60,19 +77,19 @@ const App = () => {
           // We need to do this because 'csv2json' (used by 'getData()')
           // returns a promise object
           const run = async () => {
-            const array0 = await getData(res[0].data);
-            const array1 = await getData(res[1].data);
-            const array2 = await getData(res[2].data);
+            const cases = await getData(res[0].data);
+            const cures = await getData(res[1].data);
+            const deaths = await getData(res[2].data);
             if (
-              isNotEmptyArray(array0) &&
-              isNotEmptyArray(array1) &&
-              isNotEmptyArray(array2)
+              isNotEmptyArray(cases) &&
+              isNotEmptyArray(cures) &&
+              isNotEmptyArray(deaths)
             ) {
               setState({
                 stats: mergeCountriesStats({
-                  cases: array0,
-                  cures: array1,
-                  deaths: array2,
+                  cases,
+                  cures,
+                  deaths,
                 }),
                 loading: false
               });
@@ -96,12 +113,12 @@ const App = () => {
 
   return (
     <div className="App">
-      <p>COVID-19</p>
+      <h1>COVID-19</h1>
       {loading &&
-        <p>Loading...</p>
+        <h3>Loading...</h3>
       }
       {!loading && stats && isNotEmptyArray(stats) &&
-        <ul>
+        <ul className="countries">
           {renderStats(stats)}
         </ul>
       }

@@ -102,3 +102,19 @@ export const mergeCountriesStats = ({ cases, cures, deaths }) => {
   });
   return output;
 };
+
+export const distributePercentage = ({
+  cases,
+  cures,
+  deaths,
+}) => {
+  const total = cases + cures + deaths;
+  const casesPc = cases * 100 / total;
+  const curesPc = cures * 100 / total;
+  const deathsPc = deaths * 100 / total;
+  return {
+    casesPc,
+    curesPc,
+    deathsPc
+  }
+};
