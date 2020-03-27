@@ -52,6 +52,7 @@ li {
   list-style: none;
 }
 h2 {
+  font-size: 28px;
   margin-top: 0;
 }
 
@@ -79,6 +80,8 @@ h2 {
 .stat {
   padding: 5px 10px;
   border-radius: 20%;
+  font-size: 20px;
+  font-weight: 500;
 }
 .percentages {
   height: 20px;
@@ -88,14 +91,17 @@ h2 {
 .percentage--cases {
   background-color: gold;
   color: black;
+  /* text-shadow: 1px 1px 1px white; */
 }
 .stat--cures,
 .percentage--cures {
   background-color: green;
   color: white;
+  /* text-shadow: 1px 1px 1px black; */
 }
 .stat--deaths,
 .percentage--deaths {
   background-color: red;
   color: white;
+  /* text-shadow: 1px 1px 1px black; */
 }
