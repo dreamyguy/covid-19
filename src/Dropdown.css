@@ -1,0 +1,44 @@
+.dropdown {
+  position: relative;
+}
+.dropdown--small {
+  width: 5em;
+}
+.dropdown--normal {
+  width: 11em;
+}
+.dropdown--large {
+  width: 15em;
+}
+.dropdown--max {
+  width: 100%;
+}
+.dropdown select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: none;
+  border: 1px solid black;
+  padding: 10px 35px 10px 10px;
+  width: 100%;
+  font-size: 16px;
+  color: black;
+  background-color: white;
+  border-radius: 0;
+  width: 100%;
+  line-height: 1.2;
+}
+.dropdown__icon {
+  position: absolute;
+  right: 10px;
+  top: 6px;
+}
+.dropdown__label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* Remove button from IE11 */
+select::-ms-expand {
+  display: none;
+}

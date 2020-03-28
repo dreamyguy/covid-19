@@ -62,19 +62,44 @@ h2 {
   justify-content: space-between;
   min-height: 78px;
   width: 100%;
-  padding: 5px 10px 10px;
+  padding: 5px 0 10px;
   background-color: white;
   position: fixed;
   -webkit-box-shadow: 0px -8px 39px 8px rgba(0,0,0,0.2);
   -moz-box-shadow: 0px -8px 39px 8px rgba(0,0,0,0.2);
   box-shadow: 0px -8px 39px 8px rgba(0,0,0,0.2);
 }
+.header__items {
+  justify-content: space-between;
+  align-items: center;
+}
+.logo {
+  margin-left: 10px;
+}
 .heading--site {
   margin-bottom: 5px;
 }
-.settings {}
-.button {}
-.button--settings {}
+.options {
+  margin-right: 10px;
+  justify-content: space-between;
+  flex-direction: row;
+}
+.option {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #efefef;
+}
+.option.is-active {
+  background-color: #555;
+}
+.option--search {
+  margin-right: 10px;
+}
+.option--settings {}
 .legends {
   width: 140px;
   justify-content: space-between;
@@ -148,6 +173,13 @@ h2 {
 .legend--deaths .legend__color {
   background-color: red;
   color: white;
+}
+.dropdown--sortby {
+  margin: 15px 10px 10px;
+}
+.dropdown--sortby .dropdown__label {
+  display: block;
+  margin-bottom: 8px;
 }
 
 /* HELPERS */

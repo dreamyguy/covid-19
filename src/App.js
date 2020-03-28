@@ -11,10 +11,12 @@ const curesData = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/mas
 const deathsData = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv';
 
 const initialState = {
-  stats: [],
   errorStats: '',
-  sortBy: 'deathsPercent',
+  headerHeight: 78,
+  headerIsExpanded: false,
   loading:  false,
+  sortBy: 'deathsPercent',
+  stats: [],
 };
 
 const reducer = (prevState, updatedProperty) => ({
@@ -65,6 +67,19 @@ const App = () => {
 
   const [state, setState] = useReducer(reducer, initialState);
 
+  // 'sortBy' value is returned all the way from 'Header' > 'Dropdown'
+  const handleSortBy = (sortBy) => {
+    setState(({ sortBy }));
+  };
+  // 'headerHeight' value is returned from 'Header'
+  const handleHeaderHeight = (headerHeight) => {
+    setState(({ headerHeight }));
+  };
+  // 'handleHeaderIsExpanded' status is returned from 'Header'
+  const handleHeaderIsExpanded = (headerIsExpanded) => {
+    setState(({ headerIsExpanded }));
+  };
+
   useEffect(() => {
     setState({ loading: true });
     const getCasesData = () => axios.get(casesData)
@@ -110,15 +125,27 @@ const App = () => {
   }, []);
 
   const {
-    stats,
+    headerHeight,
+    headerIsExpanded,
     loading,
     sortBy,
+    stats,
   } = state;
+
+  const headerTopPadding = headerIsExpanded ? `${headerHeight + 30}px` : `${78 + 30}px`;
 
   return (
     <>
-      <Header />
-      <div className="app align-center">
+      <Header
+        handleHeaderHeight={handleHeaderHeight}
+        handleHeaderIsExpanded={handleHeaderIsExpanded}
+        handleSortBy={handleSortBy}
+        headerHeight={headerHeight}
+        headerIsExpanded={headerIsExpanded}
+        loading={loading}
+        sortBy={sortBy}
+      />
+      <div className="app align-center" style={{ paddingTop: headerTopPadding }}>
         {loading &&
           <h3>Loading...</h3>
         }
