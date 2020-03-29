@@ -1,0 +1,25 @@
+.search label,
+.search .search__label {
+  position: relative;
+  color: black;
+  font-size: 16px;
+}
+.search__input {
+  border: 1px solid black;
+  padding: 10px 35px;
+  font-size: 16px;
+  color: black;
+  width: 75%;
+  line-height: 1.2;
+}
+.search__icon-search {
+  position: absolute;
+  left: 10px;
+  bottom: 0;
+}
+.search__icon-close {
+  position: absolute;
+  right: 10px;
+  bottom: 2px;
+  cursor: pointer;
+}

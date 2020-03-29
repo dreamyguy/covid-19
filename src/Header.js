@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import ForkMeOnGithub from 'fork-me-on-github';
 import Dropdown from './Dropdown';
-import './App.css';
 import Icon from './Icon';
+import Search from './Search';
+import './App.css';
 
 class Header extends Component {
   constructor(props) {
@@ -18,19 +19,23 @@ class Header extends Component {
     const {
       handleHeaderHeight,
       handleHeaderIsExpanded,
-      headerIsExpanded
+      headerIsExpanded,
     } = this.props;
     const finalHeight = Math.max(
       this.headerRef.current.clientHeight,
       this.headerRef.current.offsetHeight,
       this.headerRef.current.scrollHeight,
     )
-    this.setState({ height: finalHeight + 70 })
+    this.setState({ height: finalHeight + 70 });
     handleHeaderHeight(finalHeight + 70);
     handleHeaderIsExpanded(!headerIsExpanded);
   }
-  handleShowFilter() {
+  handleShowSearch() {
+    const { handleIsSearching } = this.props;
     const { showSearch } = this.state;
+    if (showSearch) {
+      handleIsSearching(false);
+    }
     this.setState({
       showSearch: !showSearch
     });
@@ -43,12 +48,18 @@ class Header extends Component {
     });
     this.getHeaderRefHeight();
   };
+  handleSearch(value) {
+    const { handleIsSearching, handleSearchValue } = this.props;
+    handleIsSearching(true);
+    handleSearchValue(value);
+  };
   render() {
     const {
       loading,
       handleSortBy,
       headerHeight,
       headerIsExpanded,
+      searchValue,
       sortBy
     } = this.props;
     const { showSearch, showSettings } = this.state;
@@ -117,7 +128,7 @@ class Header extends Component {
             </div>
           </div>
           <div className="options display-flex">
-            <div className={`option option--search${showSearch ? ' is-active' : ''}`} onClick={this.handleShowFilter.bind(this)}>
+            <div className={`option option--search${showSearch ? ' is-active' : ''}`} onClick={this.handleShowSearch.bind(this)}>
               {showSearch
                 ?
                   <Icon icon="search" color="white" size="24"/>
@@ -137,7 +148,7 @@ class Header extends Component {
         </div>
         {showSettings &&
           <Dropdown
-            name={'name'}
+            name="dropdown--sortby"
             classes="dropdown--sortby"
             label="Sort by:"
             selectedvalue={sortBy}
@@ -146,6 +157,17 @@ class Header extends Component {
             placeholder={placeholder}
             onChange={(e) => {
               handleSortBy(e.target.value)
+            }}
+          />
+        }
+        {showSearch &&
+          <Search
+            classes="search--country"
+            title="Filter by country name"
+            value={searchValue}
+            placeholder="Filter by country name"
+            onChangeHandler={(value) => {
+              this.handleSearch(value)
             }}
           />
         }

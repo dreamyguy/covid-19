@@ -1,7 +1,12 @@
 import React, { useEffect, useReducer } from 'react';
 import axios from 'axios';
 import uuid from 'uuid/v4'
-import { mergeCountriesStats, getData, enrichCountriesStats, sortCountriesBy } from './utils/covid19Util';
+import containsString, {
+  mergeCountriesStats,
+  getData,
+  enrichCountriesStats,
+  sortCountriesBy
+} from './utils/covid19Util';
 import { isNotEmptyArray } from './utils/isEmptyUtil';
 import './App.css';
 import Header from './Header';
@@ -16,6 +21,8 @@ const initialState = {
   errorStats: '',
   headerHeight: 78,
   headerIsExpanded: false,
+  isSearching: false,
+  searchValue: '',
   loading:  false,
   sortBy: 'cases',
   stats: [],
@@ -65,6 +72,18 @@ const renderStats = stats => {
   return output;
 }
 
+const renderStatsSearch = ({ stats, isSearching, searchValue }) => {
+  const output = [];
+  stats.forEach((st, i) => {
+    if (containsString(st.country, searchValue)) {
+      output.push(
+        renderCountry(st, i + 1)
+      )
+    }
+  })
+  return output;
+}
+
 const App = () => {
 
   const [state, setState] = useReducer(reducer, initialState);
@@ -80,6 +99,14 @@ const App = () => {
   // 'handleHeaderIsExpanded' status is returned from 'Header'
   const handleHeaderIsExpanded = (headerIsExpanded) => {
     setState(({ headerIsExpanded }));
+  };
+  // 'handleIsSearching' status is returned from 'Header'
+  const handleIsSearching = (isSearching) => {
+    setState(({ isSearching }));
+  };
+  // 'handleSearchValue' value is returned from 'Header'
+  const handleSearchValue = (searchValue) => {
+    setState(({ searchValue }));
   };
 
   useEffect(() => {
@@ -129,7 +156,9 @@ const App = () => {
   const {
     headerHeight,
     headerIsExpanded,
+    isSearching,
     loading,
+    searchValue,
     sortBy,
     stats,
   } = state;
@@ -141,6 +170,8 @@ const App = () => {
       <Header
         handleHeaderHeight={handleHeaderHeight}
         handleHeaderIsExpanded={handleHeaderIsExpanded}
+        handleIsSearching={handleIsSearching}
+        handleSearchValue={handleSearchValue}
         handleSortBy={handleSortBy}
         headerHeight={headerHeight}
         headerIsExpanded={headerIsExpanded}
@@ -163,11 +194,28 @@ const App = () => {
         }
         {!loading && stats && isNotEmptyArray(stats) &&
           <ul className="countries">
-            {renderStats(sortCountriesBy({
-              countries: stats,
-              sortBy,
-              mode: 'desc',
-            }))}
+            {isSearching && searchValue
+              ?
+                <>
+                  {renderStatsSearch({
+                    stats: sortCountriesBy({
+                      countries: stats,
+                      sortBy,
+                      mode: 'desc',
+                    }),
+                    isSearching,
+                    searchValue
+                  })}
+                </>
+              :
+                <>
+                  {renderStats(sortCountriesBy({
+                    countries: stats,
+                    sortBy,
+                    mode: 'desc',
+                  }))}
+                </>
+            }
           </ul>
         }
       </div>

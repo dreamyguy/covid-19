@@ -129,7 +129,8 @@ h2 {
   font-size: 14px;
 }
 .app {
-  padding-top: 120px;
+  padding-top: 120px; /* compensate for header */
+  padding-bottom: 42px; /* compensate for footer */
 }
 .loading__text {
   padding: 0 20px;
@@ -189,6 +190,7 @@ h2 {
   background-color: red;
   color: white;
 }
+.search--country,
 .dropdown--sortby {
   margin: 15px 10px 10px;
 }

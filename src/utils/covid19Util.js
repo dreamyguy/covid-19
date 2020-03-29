@@ -17,6 +17,16 @@ export const valueDividedBy = ({
   dividedBy,
 }) => value / dividedBy;
 
+// Check if string contains a substring
+export const containsString = (string, substring) => {
+  if (string.toLowerCase().replace('-', ' ').indexOf(substring.toLowerCase().replace('-', ' ')) !== -1) {
+    return true;
+  }
+  return false;
+}
+
+export default containsString;
+
 export const sortCountriesBy = ({ countries, sortBy, mode }) => {
   if (
     countries &&
