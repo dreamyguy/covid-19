@@ -21,7 +21,23 @@ The worst stats here are, in order of importance:
 
 ### Sorting
 
-- Sort by number of cases
-- Sort by number of cures
-- Sort by number of deaths
-- Sort alphabetically
+- Sort by number of cases ✅
+- Sort by number of cures ✅
+- Sort by number of deaths ✅
+- Sort alphabetically ✅
+- ...and more! ✅
+
+### Country details
+
+- Click on country to see more
+  - Show stats with labels and numbers
+    - Cases ✅
+    - Cures ✅
+    - Deaths ✅
+    - Cases percent
+    - Cures percent
+    - Deaths percent
+  - Show bar percent ✅
+  - Show bar per capita
+  - Show curve (complex!)
+- Click on star to favorite
