@@ -6,6 +6,7 @@ import { isNotEmptyArray } from './utils/isEmptyUtil';
 import './App.css';
 import Header from './Header';
 import Icon from './Icon';
+import Footer from './Footer';
 
 const casesData = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv';
 const curesData = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv';
@@ -170,6 +171,7 @@ const App = () => {
           </ul>
         }
       </div>
+      <Footer />
     </>
   );
 }

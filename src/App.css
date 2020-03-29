@@ -196,6 +196,17 @@ h2 {
   display: block;
   margin-bottom: 8px;
 }
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 10px 0;
+  display: flex;
+  justify-content: center;
+  font-size: 15px;
+  border-top: 3px solid #d3d3d3;
+  background-color: white;
+}
 
 /* HELPERS */
 
