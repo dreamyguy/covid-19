@@ -5,6 +5,7 @@ import { mergeCountriesStats, getData, enrichCountriesStats, sortCountriesBy } f
 import { isNotEmptyArray } from './utils/isEmptyUtil';
 import './App.css';
 import Header from './Header';
+import Icon from './Icon';
 
 const casesData = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv';
 const curesData = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv';
@@ -15,7 +16,7 @@ const initialState = {
   headerHeight: 78,
   headerIsExpanded: false,
   loading:  false,
-  sortBy: 'deathsPercent',
+  sortBy: 'cases',
   stats: [],
 };
 
@@ -147,7 +148,17 @@ const App = () => {
       />
       <div className="app align-center" style={{ paddingTop: headerTopPadding }}>
         {loading &&
-          <h3>Loading...</h3>
+          <div className="loading__text">
+            <h3>Fetching data and preparing it, please be patient.</h3>
+            <p>Number of cases is the default view, <em><b>but the data can be filtered</b> to show other calculations</em>.</p>
+            <p>
+              <em><b>Once the loading is done</b></em>, click on<br/>
+              <span className="option option--settings centered">
+                <Icon icon="filter" size="24" />
+              </span>
+              to activate filtering options.
+            </p>
+          </div>
         }
         {!loading && stats && isNotEmptyArray(stats) &&
           <ul className="countries">

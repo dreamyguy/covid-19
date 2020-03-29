@@ -69,12 +69,17 @@ h2 {
   -moz-box-shadow: 0px -8px 39px 8px rgba(0,0,0,0.2);
   box-shadow: 0px -8px 39px 8px rgba(0,0,0,0.2);
 }
+/* Target ForkMeOnGithub */
+.header > a > svg {
+  width: 40px;
+  height: 40px;
+}
 .header__items {
   justify-content: space-between;
   align-items: center;
 }
 .logo {
-  margin-left: 10px;
+  margin-left: 25px;
 }
 .heading--site {
   margin-bottom: 5px;
@@ -88,8 +93,8 @@ h2 {
   display: flex;
   align-content: center;
   align-items: center;
-  width: 60px;
-  height: 60px;
+  width: 54px;
+  height: 54px;
   border-radius: 50%;
   background-color: #efefef;
 }
@@ -99,7 +104,6 @@ h2 {
 .option--search {
   margin-right: 10px;
 }
-.option--settings {}
 .legends {
   width: 140px;
   justify-content: space-between;
@@ -126,6 +130,17 @@ h2 {
 }
 .app {
   padding-top: 120px;
+}
+.loading__text {
+  padding: 0 20px;
+  line-height: 1.8;
+}
+.loading__text h3,
+.loading__text p {
+  margin-bottom: 30px;
+}
+.loading__text p:last-child {
+  margin-bottom: 0;
 }
 .countries {
   max-width: 1400px;
@@ -192,4 +207,7 @@ h2 {
 }
 .align-center {
   text-align: center;
+}
+.centered {
+  margin: 0 auto;
 }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ForkMeOnGithub from 'fork-me-on-github';
 import Dropdown from './Dropdown';
 import './App.css';
 import Icon from './Icon';
@@ -93,6 +94,10 @@ class Header extends Component {
         className={`header${headerIsExpanded ? ' is-expanded' : ''}`}
         style={{ height: currentHeight }}
       >
+        <ForkMeOnGithub
+          repo="https://github.com/dreamyguy/covid-19"
+          side="left"
+        />
         <div className="header__items display-flex align-center">
           <div className="logo display-flex flex-direction-column">
             <h1 className="heading--site">COVID-19</h1>
@@ -115,17 +120,17 @@ class Header extends Component {
             <div className={`option option--search${showSearch ? ' is-active' : ''}`} onClick={this.handleShowFilter.bind(this)}>
               {showSearch
                 ?
-                  <Icon icon="search" color="white" size="30"/>
+                  <Icon icon="search" color="white" size="24"/>
                 :
-                  <Icon icon="search" size="30"/>
+                  <Icon icon="search" size="24"/>
               }
             </div>
             <div className={`option option--settings${showSettings ? ' is-active' : ''}`} onClick={this.handleShowSettings.bind(this)}>
               {showSettings
                 ?
-                  <Icon icon="filter" color="white" size="30"/>
+                  <Icon icon="filter" color="white" size="24"/>
                 :
-                  <Icon icon="filter" size="30"/>
+                  <Icon icon="filter" size="24"/>
               }
             </div>
           </div>
