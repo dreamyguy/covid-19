@@ -22,10 +22,27 @@ export const sortCountriesBy = ({ countries, sortBy, mode }) => {
     countries &&
     isNotEmptyArray(countries)
   ) {
-    if (mode === 'desc') {
-      countries.sort((a, b) => b[sortBy] - a[sortBy]);
+    if (sortBy === 'country') {
+      // 'country' is a string, so it needs special treatment
+      countries.sort((a, b) => {
+        var countryA = a.country.toLowerCase();
+        var countryB = b.country.toLowerCase();
+        if (countryA < countryB) {
+          return -1;
+        }
+        if (countryA > countryB) {
+          return 1;
+        }
+        // names must be equal
+        return 0;
+      });
     } else {
-      countries.sort((a, b) => a[sortBy] - b[sortBy]);
+      // Only dealing with numbers from now on
+      if (mode === 'desc') {
+        countries.sort((a, b) => b[sortBy] - a[sortBy]);
+      } else {
+        countries.sort((a, b) => a[sortBy] - b[sortBy]);
+      }
     }
     return countries;
   }

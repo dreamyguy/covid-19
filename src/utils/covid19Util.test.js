@@ -1,153 +1,21 @@
 import {
   mergeCountries,
   mergeCountriesReduce,
-  mergeCountriesStats
+  mergeCountriesStats,
+  sortCountriesBy
 } from './covid19Util';
 
-const countriesInput = [
-  {country: "US", value: "1642"},
-  {country: "US", value: "646"},
-  {country: "US", value: "49"},
-  {country: "US", value: "30"},
-  {country: "US", value: "600"},
-  {country: "US", value: "476"},
-  {country: "US", value: "830"},
-  {country: "US", value: "1914"},
-  {country: "US", value: "161"},
-  {country: "US", value: "627"},
-  {country: "US", value: "1049"},
-  {country: "US", value: "509"},
-  {country: "US", value: "90"},
-  {country: "US", value: "244"},
-  {country: "US", value: "302"},
-  {country: "US", value: "196"},
-  {country: "US", value: "505"},
-  {country: "US", value: "221"},
-  {country: "US", value: "152"},
-  {country: "US", value: "201"},
-  {country: "US", value: "99"},
-  {country: "US", value: "102"},
-  {country: "US", value: "190"},
-  {country: "US", value: "65"},
-  {country: "US", value: "169"},
-  {country: "US", value: "51"},
-  {country: "US", value: "355"},
-  {country: "US", value: "83"},
-  {country: "US", value: "381"},
-  {country: "US", value: "223"},
-  {country: "US", value: "48"},
-  {country: "US", value: "67"},
-  {country: "US", value: "181"},
-  {country: "Burkina Faso", value: "75"},
-  {country: "Holy See", value: "1"},
-  {country: "Mongolia", value: "10"},
-  {country: "Panama", value: "245"},
-  {country: "US", value: "64"},
-  {country: "US", value: "837"},
-  {country: "US", value: "100"},
-  {country: "US", value: "52"},
-  {country: "US", value: "21"},
-  {country: "US", value: "165"},
-  {country: "US", value: "47"},
-  {country: "US", value: "42"},
-  {country: "US", value: "89"},
-  {country: "US", value: "1037"},
-  {country: "US", value: "207"},
-  {country: "US", value: "31"},
-  {country: "US", value: "57"},
-  {country: "US", value: "28"},
-  {country: "US", value: "21"},
-  {country: "US", value: "12"},
-  {country: "US", value: "24"},
-  {country: "China", value: "67800"},
-  {country: "Iran", value: "21638"},
-  {country: "Korea, South", value: "8897"},
-  {country: "France", value: "16018"},
-  {country: "China", value: "1413"},
-  {country: "China", value: "1274"},
-  {country: "China", value: "1238"},
-  {country: "China", value: "1018"},
-  {country: "China", value: "990"},
-  {country: "China", value: "936"},
-  {country: "China", value: "767"},
-  {country: "Cruise Ship", value: "712"},
-  {country: "China", value: "633"},
-  {country: "China", value: "577"},
-  {country: "China", value: "543"},
-  {country: "China", value: "484"},
-  {country: "Denmark", value: "1395"},
-  {country: "China", value: "522"},
-  {country: "China", value: "404"},
-  {country: "China", value: "319"},
-  {country: "China", value: "313"},
-  {country: "China", value: "254"},
-  {country: "China", value: "248"},
-  {country: "China", value: "176"},
-  {country: "China", value: "168"},
-  {country: "China", value: "146"},
-  {country: "China", value: "141"},
-  {country: "China", value: "133"},
-  {country: "China", value: "136"},
-  {country: "China", value: "317"},
-  {country: "China", value: "127"},
-  {country: "China", value: "93"},
-  {country: "Czechia", value: "1120"},
-  {country: "China", value: "76"},
-  {country: "China", value: "75"},
-  {country: "China", value: "75"},
-  {country: "Taiwan*", value: "169"},
-  {country: "Vietnam", value: "113"},
-  {country: "Russia", value: "367"},
-  {country: "China", value: "18"},
-  {country: "China", value: "24"},
-  {country: "Moldova", value: "94"},
-  {country: "Bolivia", value: "24"},
-  {country: "Denmark", value: "115"},
-  {country: "France", value: "4"},
-  {country: "Honduras", value: "26"},
-];
-
-const countriesOutput = [
-  { country: 'US', value: 15292 },
-  { country: 'Burkina Faso', value: 75 },
-  { country: 'Holy See', value: 1 },
-  { country: 'Mongolia', value: 10 },
-  { country: 'Panama', value: 245 },
-  { country: 'China', value: 81438 },
-  { country: 'Iran', value: 21638 },
-  { country: 'Korea, South', value: 8897 },
-  { country: 'France', value: 16022 },
-  { country: 'Cruise Ship', value: 712 },
-  { country: 'Denmark', value: 1510 },
-  { country: 'Czechia', value: 1120 },
-  { country: 'Taiwan*', value: 169 },
-  { country: 'Vietnam', value: 113 },
-  { country: 'Russia', value: 367 },
-  { country: 'Moldova', value: 94 },
-  { country: 'Bolivia', value: 24 },
-  { country: 'Honduras', value: 26 }
-];
-
-const countriesOutputReduce = [
-  { country: 'US', value: 28942 }, // different!
-  { country: 'Burkina Faso', value: 75 },
-  { country: 'Holy See', value: 1 },
-  { country: 'Mongolia', value: 10 },
-  { country: 'Panama', value: 245 },
-  { country: 'China', value: 95076 }, // different!
-  { country: 'Iran', value: 21638 },
-  { country: 'Korea, South', value: 8897 },
-  { country: 'France', value: 16026 }, // different!
-  { country: 'Cruise Ship', value: 712 },
-  { country: 'Denmark', value: 1625 }, // different!
-  { country: 'Czechia', value: 1120 },
-  { country: 'Taiwan*', value: 169 },
-  { country: 'Vietnam', value: 113 },
-  { country: 'Russia', value: 367 },
-  { country: 'Moldova', value: 94 },
-  { country: 'Bolivia', value: 24 },
-  { country: 'Honduras', value: 26 }
-];
+import {
+  countriesInput,
+  countriesOutput,
+  countriesOutputReduce,
+  countriesSortedByCases,
+  countriesSortedByCountry,
+  countriesSortedByCures,
+  countriesSortedByDeaths,
+  countriesSortedByDeathsPercent,
+  countriesUnsorted,
+} from './covid19Util.mock';
 
 const mergedDeaths = [
   {country: "Thailand", value: 1},
@@ -584,6 +452,51 @@ describe('mergeCountriesUtil', () => {
         cures: mergedCures,
         deaths: mergedDeaths,
       })).toEqual(mergeCountriesStatsOutput);
+    })
+  })
+  describe('sortCountriesBy', () => {
+    it('cases', () => {
+      const sortBy = 'cases';
+      const mode = 'desc';
+      expect(sortCountriesBy({
+        countries: countriesUnsorted,
+        sortBy,
+        mode
+      })).toEqual(countriesSortedByCases);
+    })
+    it('cures', () => {
+      const sortBy = 'cures';
+      const mode = 'desc';
+      expect(sortCountriesBy({
+        countries: countriesUnsorted,
+        sortBy,
+        mode
+      })).toEqual(countriesSortedByCures);
+    })
+    it('deaths', () => {
+      const sortBy = 'deaths';
+      const mode = 'desc';
+      expect(sortCountriesBy({
+        countries: countriesUnsorted,
+        sortBy,
+        mode
+      })).toEqual(countriesSortedByDeaths);
+    })
+    it('deathsPercent', () => {
+      const sortBy = 'deathsPercent';
+      const mode = 'desc';
+      expect(sortCountriesBy({
+        countries: countriesUnsorted,
+        sortBy,
+        mode
+      })).toEqual(countriesSortedByDeathsPercent);
+    })
+    it('country', () => {
+      const sortBy = 'country';
+      expect(sortCountriesBy({
+        countries: countriesUnsorted,
+        sortBy
+      })).toEqual(countriesSortedByCountry);
     })
   })
 });

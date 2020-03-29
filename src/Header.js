@@ -24,8 +24,8 @@ class Header extends Component {
       this.headerRef.current.offsetHeight,
       this.headerRef.current.scrollHeight,
     )
-    this.setState({ height: finalHeight + 63 })
-    handleHeaderHeight(finalHeight + 63);
+    this.setState({ height: finalHeight + 70 })
+    handleHeaderHeight(finalHeight + 70);
     handleHeaderIsExpanded(!headerIsExpanded);
   }
   handleShowFilter() {
