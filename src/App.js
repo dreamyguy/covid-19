@@ -39,7 +39,7 @@ const renderCountry = (country, rank) => {
     cases,
     cures,
     deaths,
-    casesPercent,
+    sickPercent,
     curesPercent,
     deathsPercent,
   } = country;
@@ -54,7 +54,7 @@ const renderCountry = (country, rank) => {
         </div>
       </div>
       <div className="display-flex percentages">
-        <div className="percentage percentage--cases" style={{ width: `${casesPercent}%` }} />
+        <div className="percentage percentage--cases" style={{ width: `${sickPercent}%` }} />
         <div className="percentage percentage--cures" style={{ width: `${curesPercent}%` }} />
         <div className="percentage percentage--deaths" style={{ width: `${deathsPercent}%` }} />
       </div>

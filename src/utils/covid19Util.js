@@ -154,20 +154,20 @@ export const enrichCountriesStats = countries => {
   const output = [];
   countries && isNotEmptyArray(countries) && countries.forEach(co => {
     const { country, cases, cures, deaths/*, population*/ } = co;
-    const total = cases + cures + deaths;
+    const sick = cases - (cures + deaths);
     output.push({
       country,
       cases,
+      sick,
       cures,
       deaths,
       // population,
-      casesPercent: cases * 100 / total,
-      curesPercent: cures * 100 / total,
-      deathsPercent: deaths * 100 / total,
+      sickPercent: sick * 100 / cases,
+      curesPercent: cures * 100 / cases,
+      deathsPercent: deaths * 100 / cases,
       // casesPerCapita: cases * 100 / population,
       // curesPerCapita: cures * 100 / population,
       // deathsPerCapita: deaths * 100 / population,
-      total,
     });
   });
   return output;
