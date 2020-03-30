@@ -3,7 +3,7 @@ import ForkMeOnGithub from 'fork-me-on-github';
 import Dropdown from './Dropdown';
 import Icon from './Icon';
 import Search from './Search';
-import './App.css';
+import './Header.css';
 
 class Header extends Component {
   constructor(props) {
@@ -128,22 +128,22 @@ class Header extends Component {
             </div>
           </div>
           <div className="options display-flex">
-            <div className={`option option--search${showSearch ? ' is-active' : ''}`} onClick={this.handleShowSearch.bind(this)}>
+            <button className={`option option--search${showSearch ? ' is-active' : ''}`} onClick={this.handleShowSearch.bind(this)}>
               {showSearch
                 ?
                   <Icon icon="search" color="white" size="24"/>
                 :
                   <Icon icon="search" size="24"/>
               }
-            </div>
-            <div className={`option option--settings${showSettings ? ' is-active' : ''}`} onClick={this.handleShowSettings.bind(this)}>
+            </button>
+            <button className={`option option--settings${showSettings ? ' is-active' : ''}`} onClick={this.handleShowSettings.bind(this)}>
               {showSettings
                 ?
                   <Icon icon="filter" color="white" size="24"/>
                 :
                   <Icon icon="filter" size="24"/>
               }
-            </div>
+            </button>
           </div>
         </div>
         {showSettings &&
