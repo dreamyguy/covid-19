@@ -49,14 +49,14 @@ const renderCountry = (country, rank) => {
       <div>
         <h2 className="heading--country">{rank}. {countryName}</h2>
         <div className="display-flex stats">
-          <span className="stat stat--sick">{sick}</span>
-          <span className="stat stat--cures">{cures}</span>
-          <span className="stat stat--deaths">{deaths}</span>
+          {cures ? <span className="stat stat--cures">{cures}</span> : null}
+          {sick ? <span className="stat stat--sick">{sick}</span> : null}
+          {deaths ? <span className="stat stat--deaths">{deaths}</span> : null}
         </div>
       </div>
       <div className="display-flex percentages">
-        <div className="percentage percentage--sick" style={{ width: `${sickPercent}%` }} />
         <div className="percentage percentage--cures" style={{ width: `${curesPercent}%` }} />
+        <div className="percentage percentage--sick" style={{ width: `${sickPercent}%` }} />
         <div className="percentage percentage--deaths" style={{ width: `${deathsPercent}%` }} />
       </div>
       <div className="total">{cases}</div>
