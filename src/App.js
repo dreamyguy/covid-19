@@ -19,7 +19,7 @@ const deathsData = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/ma
 
 const initialState = {
   errorStats: '',
-  headerHeight: 78,
+  headerHeight: null,
   headerIsExpanded: false,
   isSearching: false,
   searchValue: '',
@@ -92,23 +92,23 @@ const App = () => {
 
   // 'sortBy' value is returned all the way from 'Header' > 'Dropdown'
   const handleSortBy = (sortBy) => {
-    setState(({ sortBy }));
+    setState({ sortBy });
   };
   // 'headerHeight' value is returned from 'Header'
   const handleHeaderHeight = (headerHeight) => {
-    setState(({ headerHeight }));
+    setState({ headerHeight });
   };
   // 'handleHeaderIsExpanded' status is returned from 'Header'
   const handleHeaderIsExpanded = (headerIsExpanded) => {
-    setState(({ headerIsExpanded }));
+    setState({ headerIsExpanded });
   };
   // 'handleIsSearching' status is returned from 'Header'
   const handleIsSearching = (isSearching) => {
-    setState(({ isSearching }));
+    setState({ isSearching });
   };
   // 'handleSearchValue' value is returned from 'Header'
   const handleSearchValue = (searchValue) => {
-    setState(({ searchValue }));
+    setState({ searchValue });
   };
 
   useEffect(() => {

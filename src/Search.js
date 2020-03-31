@@ -40,7 +40,7 @@ class Search extends Component {
       <div className={`search${classes ? ' ' + classes : ''}`}>
         <label htmlFor="search" >
           {title &&
-            <span class="search__label">
+            <span className="search__label">
               <em>{title}</em>
             </span>
           }

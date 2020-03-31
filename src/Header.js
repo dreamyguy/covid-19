@@ -11,42 +11,72 @@ class Header extends Component {
     this.state = {
       showSearch: false,
       showSettings: false,
-      height: ''
     };
-    this.headerRef = React.createRef();
+    this.headerContentRef = React.createRef();
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      this.props.headerHeight !== prevProps.headerHeight ||
+      this.state.showSearch !== prevState.showSearch ||
+      this.state.showSettings !== prevState.showSettings
+    ) {
+      this.getHeaderRefHeight()
+    }
+  }
+  setHeaderIsExpanded(value, mode) {
+    const {
+      handleHeaderIsExpanded,
+    } = this.props;
+    const {
+      showSearch,
+      showSettings,
+    } = this.state;
+    if (value) {
+      handleHeaderIsExpanded(true);
+    } else if (!value && mode === 'search' && showSettings) {
+      handleHeaderIsExpanded(true);
+    } else if (!value && mode === 'settings' && showSearch) {
+      handleHeaderIsExpanded(true);
+    } else if (!value && mode === 'search' && !showSettings) {
+      // Syntax sugar
+      handleHeaderIsExpanded(false);
+    } else if (!value && mode === 'settings' && !showSearch) {
+      // Syntax sugar
+      handleHeaderIsExpanded(false);
+    } else {
+      handleHeaderIsExpanded(false);
+    }
   }
   getHeaderRefHeight() {
     const {
       handleHeaderHeight,
-      handleHeaderIsExpanded,
-      headerIsExpanded,
     } = this.props;
-    const finalHeight = Math.max(
-      this.headerRef.current.clientHeight,
-      this.headerRef.current.offsetHeight,
-      this.headerRef.current.scrollHeight,
+    const finalHeaderHeight = Math.max(
+      this.headerContentRef.current.clientHeight,
+      this.headerContentRef.current.offsetHeight,
+      this.headerContentRef.current.scrollHeight,
     )
-    this.setState({ height: finalHeight + 70 });
-    handleHeaderHeight(finalHeight + 70);
-    handleHeaderIsExpanded(!headerIsExpanded);
+    handleHeaderHeight(finalHeaderHeight);
   }
   handleShowSearch() {
-    const { handleIsSearching } = this.props;
-    const { showSearch } = this.state;
-    if (showSearch) {
-      handleIsSearching(false);
-    }
+    const {
+      showSearch,
+    } = this.state;
     this.setState({
       showSearch: !showSearch
     });
-    this.getHeaderRefHeight();
+    this.setHeaderIsExpanded(!showSearch, 'search');
+    this.getHeaderRefHeight('search');
   };
   handleShowSettings() {
-    const { showSettings } = this.state;
+    const {
+      showSettings,
+    } = this.state;
     this.setState({
       showSettings: !showSettings
     });
-    this.getHeaderRefHeight();
+    this.setHeaderIsExpanded(!showSettings, 'settings');
+    this.getHeaderRefHeight('settings');
   };
   handleSearch(value) {
     const { handleIsSearching, handleSearchValue } = this.props;
@@ -57,13 +87,11 @@ class Header extends Component {
     const {
       loading,
       handleSortBy,
-      headerHeight,
       headerIsExpanded,
       searchValue,
       sortBy
     } = this.props;
     const { showSearch, showSettings } = this.state;
-    const currentHeight = headerIsExpanded ? `${headerHeight}px` : '78px';
     const options = [
       {
         value: 'country',
@@ -93,84 +121,80 @@ class Header extends Component {
         value: 'deathsPercent',
         title: 'Deaths Percent',
       },
-      {
-        value: 'total',
-        title: 'Total',
-      },
     ];
     const placeholder = 'Sort by';
     return (
       <div
-        ref={this.headerRef}
         className={`header${headerIsExpanded ? ' is-expanded' : ''}`}
-        style={{ height: currentHeight }}
       >
         <ForkMeOnGithub
           repo="https://github.com/dreamyguy/covid-19"
           side="left"
         />
-        <div className="header__items display-flex align-center">
-          <div className="logo display-flex flex-direction-column">
-            <h1 className="heading--site">COVID-19</h1>
-            <div className="legends display-flex">
-              <div className="legend legend--sick">
-                <span className="legend__color" />
-                <span className="legend__label">Sick</span>
-              </div>
-              <div className="legend legend--cures">
-                <span className="legend__color" />
-                <span className="legend__label">Cures</span>
-              </div>
-              <div className="legend legend--deaths">
-                <span className="legend__color" />
-                <span className="legend__label">Deaths</span>
+        <div className="header__content" ref={this.headerContentRef}>
+          <div className="header__items display-flex align-center">
+            <div className="logo display-flex flex-direction-column">
+              <h1 className="heading--site">COVID-19</h1>
+              <div className="legends display-flex">
+                <div className="legend legend--sick">
+                  <span className="legend__color" />
+                  <span className="legend__label">Sick</span>
+                </div>
+                <div className="legend legend--cures">
+                  <span className="legend__color" />
+                  <span className="legend__label">Cures</span>
+                </div>
+                <div className="legend legend--deaths">
+                  <span className="legend__color" />
+                  <span className="legend__label">Deaths</span>
+                </div>
               </div>
             </div>
+            <div className="options display-flex">
+              <button className={`option option--search${showSearch ? ' is-active' : ''}`} onClick={this.handleShowSearch.bind(this)}>
+                {showSearch
+                  ?
+                    <Icon icon="search" color="white" size="24"/>
+                  :
+                    <Icon icon="search" size="24"/>
+                }
+              </button>
+              <button className={`option option--settings${showSettings ? ' is-active' : ''}`} onClick={this.handleShowSettings.bind(this)}>
+                {showSettings
+                  ?
+                    <Icon icon="filter" color="white" size="24"/>
+                  :
+                    <Icon icon="filter" size="24"/>
+                }
+              </button>
+            </div>
           </div>
-          <div className="options display-flex">
-            <button className={`option option--search${showSearch ? ' is-active' : ''}`} onClick={this.handleShowSearch.bind(this)}>
-              {showSearch
-                ?
-                  <Icon icon="search" color="white" size="24"/>
-                :
-                  <Icon icon="search" size="24"/>
-              }
-            </button>
-            <button className={`option option--settings${showSettings ? ' is-active' : ''}`} onClick={this.handleShowSettings.bind(this)}>
-              {showSettings
-                ?
-                  <Icon icon="filter" color="white" size="24"/>
-                :
-                  <Icon icon="filter" size="24"/>
-              }
-            </button>
-          </div>
+          {showSettings &&
+            <Dropdown
+              name="dropdown--sortby"
+              classes="dropdown--sortby"
+              label="Sort by:"
+              selectedvalue={sortBy}
+              disabled={loading}
+              options={options}
+              placeholder={placeholder}
+              onChange={(e) => {
+                handleSortBy(e.target.value)
+              }}
+            />
+          }
+          {showSearch &&
+            <Search
+              classes="search--country"
+              title="Filter by country name"
+              value={searchValue}
+              placeholder="Filter by country name"
+              onChangeHandler={(value) => {
+                this.handleSearch(value)
+              }}
+            />
+          }
         </div>
-        {showSettings &&
-          <Dropdown
-            name="dropdown--sortby"
-            classes="dropdown--sortby"
-            label="Sort by:"
-            selectedvalue={sortBy}
-            disabled={loading}
-            options={options}
-            placeholder={placeholder}
-            onChange={(e) => {
-              handleSortBy(e.target.value)
-            }}
-          />
-        }
-        {showSearch &&
-          <Search
-            classes="search--country"
-            title="Filter by country name"
-            value={searchValue}
-            placeholder="Filter by country name"
-            onChangeHandler={(value) => {
-              this.handleSearch(value)
-            }}
-          />
-        }
       </div>
     );
   }

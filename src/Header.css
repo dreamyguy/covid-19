@@ -42,7 +42,7 @@
 .option.is-active {
   background-color: #555;
 }
-.option--search {
+.header .option--search {
   margin-right: 10px;
 }
 .legends {
