@@ -174,6 +174,7 @@ class Header extends Component {
               name="dropdown--sortby"
               classes="dropdown--sortby"
               label="Sort by:"
+              labelToLeft
               selectedvalue={sortBy}
               disabled={loading}
               options={options}
@@ -186,7 +187,6 @@ class Header extends Component {
           {showSearch &&
             <Search
               classes="search--country"
-              title="Filter by country name"
               value={searchValue}
               placeholder="Filter by country name"
               onChangeHandler={(value) => {

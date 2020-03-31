@@ -9,11 +9,18 @@
 }
 .search__input {
   border: 1px solid black;
+  border-radius: 0;
   padding: 10px 35px;
   font-size: 16px;
   color: black;
-  width: 75%;
   line-height: 1.2;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 .search__icon-search {
   position: absolute;
@@ -23,6 +30,6 @@
 .search__icon-close {
   position: absolute;
   right: 10px;
-  bottom: 2px;
+  bottom: 0;
   cursor: pointer;
 }

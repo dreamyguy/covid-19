@@ -43,22 +43,39 @@ class Dropdown extends Component {
       </select>
     )
   }
+  renderLabel() {
+    const {
+      label = '',
+    } = this.props;
+    return (
+      <>
+        {label &&
+          <span className="dropdown__label">
+            <em>{label}</em>
+          </span>
+        }
+        {this.renderDropDown()}
+        <Icon classes="dropdown__icon" icon="chevron" size="12"/>
+      </>
+    );
+  }
   render() {
     const {
       classes = '', // accepts CSS classNames as string
-      label = '',
+      labelToLeft,
       size = ''
     } = this.props;
     return (
       <div className={`${size ? `dropdown--${size}` : ''}${classes ? ' ' + classes : ''}`}>
         <label className="dropdown">
-          {label &&
-            <span className="dropdown__label">
-              <em>{label}</em>
-            </span>
+          {labelToLeft
+            ?
+              <div className="dropdown__flex">
+                {this.renderLabel()}
+              </div>
+            :
+              this.renderLabel()
           }
-          {this.renderDropDown()}
-          <Icon classes="dropdown__icon" icon="chevron" size="12"/>
         </label>
       </div>
     );

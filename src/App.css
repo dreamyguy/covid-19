@@ -70,6 +70,9 @@ h2 {
 .loading__text p {
   margin-bottom: 20px;
 }
+.loading__text .loading__option {
+  margin-bottom: 15px;
+}
 .loading__text p:last-child {
   margin-bottom: 0;
 }

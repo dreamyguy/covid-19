@@ -184,13 +184,17 @@ const App = () => {
         {loading &&
           <div className="loading__text">
             <h3>Fetching live data and preparing it.</h3>
-            <h4>Each number has a human story behind it!</h4>
-            <p>
-              <em><b>Once the loading is done</b></em>:<br/><br/>
+            <h4><em>Each number has a human story behind it!</em></h4>
+            <p className="loading__option">
+              <b>Once the loading is done</b>:
+            </p>
+            <p className="loading__option">
               <span className="option option--settings centered">
                 <Icon icon="filter" size="24" />
               </span>
-              Activate filtering options.<br/><br/>
+              Activate filtering options.
+            </p>
+            <p>
               <span className="option option--search centered">
                 <Icon icon="search" size="24" />
               </span>

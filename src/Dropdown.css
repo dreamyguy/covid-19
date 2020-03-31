@@ -29,13 +29,19 @@
   line-height: 1.2;
 }
 .dropdown__icon {
-  position: absolute;
-  right: 10px;
-  top: 6px;
+  position: relative;
+  right: 24px;
+  top: 0;
+  z-index: 2;
+}
+.dropdown__flex {
+  display: flex;
+  align-items: center;
 }
 .dropdown__label {
   display: block;
   margin-bottom: 8px;
+  min-width: 70px;
 }
 
 /* Remove button from IE11 */
