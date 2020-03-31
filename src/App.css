@@ -78,45 +78,57 @@ h2 {
 }
 .country {
   margin-bottom: 10px;
-  padding: 10px;
+  padding: 5px;
   background-color: #efefef;
 }
 .heading--country {
-  font-size: 24px;
-  margin-bottom: 10px;
+  font-size: 22px;
+  margin-bottom: 5px;
 }
 .stats {
   justify-content: space-evenly;
 }
 .stats {
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 .stat {
   padding: 5px 8px;
-  border-radius: 20%;
+  border-radius: 8px;
   font-size: 16px;
   font-weight: 500;
 }
 .percentages {
-  height: 18px;
+  height: 12px;
 }
-.percentage {}
+.total {
+  margin-top: 5px;
+  text-align: center;
+  padding: 5px 0;
+  background-color: #dcdcdc;
+  color: black;
+}
 .stat--cases,
 .percentage--cases,
 .legend--cases .legend__color {
-  background-color: gold;
+  background-color: #1978D4;
+  color: white;
+}
+.stat--sick,
+.percentage--sick,
+.legend--sick .legend__color {
+  background-color: #f7ca18;
   color: black;
 }
 .stat--cures,
 .percentage--cures,
 .legend--cures .legend__color {
-  background-color: green;
+  background-color: #007e00;
   color: white;
 }
 .stat--deaths,
 .percentage--deaths,
 .legend--deaths .legend__color {
-  background-color: red;
+  background-color: #6100b5;
   color: white;
 }
 .search--country,

@@ -40,7 +40,9 @@ class Search extends Component {
       <div className={`search${classes ? ' ' + classes : ''}`}>
         <label htmlFor="search" >
           {title &&
-            <p className="search__label">{title}</p>
+            <span class="search__label">
+              <em>{title}</em>
+            </span>
           }
           <input
             id={uuidv4()}

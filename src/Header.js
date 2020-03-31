@@ -82,8 +82,8 @@ class Header extends Component {
         title: 'Deaths',
       },
       {
-        value: 'casesPercent',
-        title: 'Cases Percent',
+        value: 'sick',
+        title: 'Sick',
       },
       {
         value: 'curesPercent',
@@ -113,9 +113,9 @@ class Header extends Component {
           <div className="logo display-flex flex-direction-column">
             <h1 className="heading--site">COVID-19</h1>
             <div className="legends display-flex">
-              <div className="legend legend--cases">
+              <div className="legend legend--sick">
                 <span className="legend__color" />
-                <span className="legend__label">Cases</span>
+                <span className="legend__label">Sick</span>
               </div>
               <div className="legend legend--cures">
                 <span className="legend__color" />

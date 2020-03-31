@@ -1,8 +1,11 @@
-.search label,
-.search .search__label {
+.search label {
   position: relative;
   color: black;
   font-size: 16px;
+}
+.search__label {
+  display: block;
+  margin-bottom: 8px;
 }
 .search__input {
   border: 1px solid black;

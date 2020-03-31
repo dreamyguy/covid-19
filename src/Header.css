@@ -54,6 +54,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+  min-width: 46px;
 }
 .legend__color,
 .legend__label {
