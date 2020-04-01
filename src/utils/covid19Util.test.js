@@ -1,9 +1,11 @@
 import containsString, {
   getCountries,
+  globalStats,
   mergeCountries,
   mergeCountriesReduce,
   mergeCountriesStats,
   sortCountriesBy,
+  thousandify,
 } from './covid19Util';
 
 import {
@@ -18,6 +20,7 @@ import {
   countriesSortedByDeaths,
   countriesSortedByDeathsPercent,
   countriesUnsorted,
+  globalStatsOutput,
   mergeCountriesStatsOutput,
   mergedCases,
   mergedCures,
@@ -28,6 +31,11 @@ describe('covid19Util', () => {
   describe('getCountries', () => {
     it('returns expected array', () => {
       expect(getCountries(countriesCSVOutput)).toEqual(countriesCSVOutputFiltered);
+    })
+  })
+  describe('globalStats', () => {
+    it('returns expected array', () => {
+      expect(globalStats(mergeCountriesStatsOutput)).toEqual(globalStatsOutput);
     })
   })
   describe('mergeCountries', () => {
@@ -144,6 +152,14 @@ describe('covid19Util', () => {
       const string = '';
       const substring = 'y';
       expect(containsString(string, substring)).toEqual(false);
+    })
+  })
+  describe('thousandify', () => {
+    it(`returns number '123123131231231' with thousand separators`, () => {
+      expect(thousandify(123123131231231)).toEqual('123,123,131,231,231');
+    })
+    it(`returns number '333666999' with thousand separators`, () => {
+      expect(thousandify(333666999)).toEqual('333,666,999');
     })
   })
 });

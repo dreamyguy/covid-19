@@ -12,6 +12,8 @@ export const getCountries = countries => {
   return mergeCountries(allCountries);
 };
 
+export const thousandify = number => Number(number).toLocaleString();
+
 export const valueDividedBy = ({
   value,
   dividedBy,
@@ -170,5 +172,22 @@ export const enrichCountriesStats = countries => {
       // deathsPerCapita: deaths * 100 / population,
     });
   });
+  return output;
+};
+
+export const globalStats = countries => {
+  let output = [];
+  if (countries && isNotEmptyArray(countries)) {
+    output = countries.reduce((a, b) => ({
+      country: 'WORLD',
+      cases: (a.cases + b.cases),
+      cures: (a.cures + b.cures),
+      deaths: (a.deaths + b.deaths),
+      sick: ((a.cases - (a.cures + a.deaths)) + (b.cases - (b.cures + b.deaths))),
+      sickPercent: (((a.cases - (a.cures + a.deaths)) + (b.cases - (b.cures + b.deaths))) * 100) / (a.cases + b.cases),
+      curesPercent: ((a.cures + b.cures) * 100) / (a.cases + b.cases),
+      deathsPercent: ((a.deaths + b.deaths) * 100) / (a.cases + b.cases),
+    }));
+  };
   return output;
 };

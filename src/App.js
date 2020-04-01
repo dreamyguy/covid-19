@@ -5,10 +5,12 @@ import Header from './Header';
 import Footer from './Footer';
 import Loading from './Loading';
 import containsString, {
-  mergeCountriesStats,
-  getData,
   enrichCountriesStats,
-  sortCountriesBy
+  getData,
+  globalStats,
+  mergeCountriesStats,
+  sortCountriesBy,
+  thousandify,
 } from './utils/covid19Util';
 import { isNotEmptyArray } from './utils/isEmptyUtil';
 import './App.css';
@@ -49,9 +51,9 @@ const renderCountry = (country, rank) => {
       <div>
         <h2 className="heading--country">{rank}. {countryName}</h2>
         <div className="display-flex stats">
-          {cures ? <span className="stat stat--cures">{cures}</span> : null}
-          {sick ? <span className="stat stat--sick">{sick}</span> : null}
-          {deaths ? <span className="stat stat--deaths">{deaths}</span> : null}
+          {cures ? <span className="stat stat--cures">{thousandify(cures)}</span> : null}
+          {sick ? <span className="stat stat--sick">{thousandify(sick)}</span> : null}
+          {deaths ? <span className="stat stat--deaths">{thousandify(deaths)}</span> : null}
         </div>
       </div>
       <div className="display-flex percentages">
@@ -59,7 +61,7 @@ const renderCountry = (country, rank) => {
         <div className="percentage percentage--sick" style={{ width: `${sickPercent}%` }} />
         <div className="percentage percentage--deaths" style={{ width: `${deathsPercent}%` }} />
       </div>
-      <div className="total">{cases}</div>
+      <div className="total">{thousandify(cases)}</div>
     </li>
   );
 }
@@ -134,12 +136,15 @@ const App = () => {
               isNotEmptyArray(cures) &&
               isNotEmptyArray(deaths)
             ) {
+              const stats = enrichCountriesStats(mergeCountriesStats({
+                cases,
+                cures,
+                deaths,
+              }));
+              const statsGlobal = globalStats(stats);
+              stats.push(statsGlobal);
               setState({
-                stats: enrichCountriesStats(mergeCountriesStats({
-                  cases,
-                  cures,
-                  deaths,
-                })),
+                stats,
                 loading: false
               });
             }
