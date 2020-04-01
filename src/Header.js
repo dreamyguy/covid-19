@@ -94,32 +94,32 @@ class Header extends Component {
     const { showSearch, showSettings } = this.state;
     const options = [
       {
-        value: 'country',
-        title: 'Country',
-      },
-      {
         value: 'cases',
         title: 'Cases',
+      },
+      {
+        value: 'country',
+        title: 'Country',
       },
       {
         value: 'cures',
         title: 'Cures',
       },
       {
-        value: 'deaths',
-        title: 'Deaths',
-      },
-      {
-        value: 'sick',
-        title: 'Sick',
-      },
-      {
         value: 'curesPercent',
         title: 'Cures Percent',
       },
       {
+        value: 'deaths',
+        title: 'Deaths',
+      },
+      {
         value: 'deathsPercent',
         title: 'Deaths Percent',
+      },
+      {
+        value: 'sick',
+        title: 'Sick',
       },
     ];
     const placeholder = 'Sort by';
