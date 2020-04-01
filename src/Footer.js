@@ -1,5 +1,6 @@
 import React from 'react';
 import Emoji from 'react-emojis';
+import './Footer.css';
 
 const Footer = () => (
   <footer>

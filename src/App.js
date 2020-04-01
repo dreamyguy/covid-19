@@ -1,6 +1,9 @@
 import React, { useEffect, useReducer } from 'react';
 import axios from 'axios';
 import uuid from 'uuid/v4'
+import Header from './Header';
+import Footer from './Footer';
+import Loading from './Loading';
 import containsString, {
   mergeCountriesStats,
   getData,
@@ -9,9 +12,6 @@ import containsString, {
 } from './utils/covid19Util';
 import { isNotEmptyArray } from './utils/isEmptyUtil';
 import './App.css';
-import Header from './Header';
-import Icon from './Icon';
-import Footer from './Footer';
 
 const casesData = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv';
 const curesData = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv';
@@ -74,7 +74,7 @@ const renderStats = stats => {
   return output;
 }
 
-const renderStatsSearch = ({ stats, isSearching, searchValue }) => {
+const renderStatsSearch = ({ stats, searchValue }) => {
   const output = [];
   stats.forEach((st, i) => {
     if (containsString(st.country, searchValue)) {
@@ -182,26 +182,7 @@ const App = () => {
       />
       <div className="app align-center" style={{ paddingTop: headerTopPadding }}>
         {loading &&
-          <div className="loading__text">
-            <h3>Fetching live data and preparing it.</h3>
-            <h4><em>Each number has a human story behind it!</em></h4>
-            <p className="loading__option">
-              <b>Once the loading is done</b>:
-            </p>
-            <p className="loading__option">
-              <span className="option option--settings centered">
-                <Icon icon="filter" size="24" />
-              </span>
-              Activate filtering options.
-            </p>
-            <p>
-              <span className="option option--search centered">
-                <Icon icon="search" size="24" />
-              </span>
-              Search by country name.
-            </p>
-            <p>Number of cases is the default view, <em><b>but the data can be filtered</b> to show other calculations</em>.</p>
-          </div>
+          <Loading />
         }
         {!loading && stats && isNotEmptyArray(stats) &&
           <ul className="countries">
