@@ -29,8 +29,14 @@ h2 {
   padding-top: 120px; /* compensate for header */
   padding-bottom: 42px; /* compensate for footer */
 }
+@media (max-width: 320px) {
+  .app {
+    padding-top: 196px; /* compensate for header */
+  }
+}
 .countries {
-  max-width: 1400px;
+  max-width: 900px;
+  margin: 0 auto;
   padding: 0 20px;
 }
 .country {

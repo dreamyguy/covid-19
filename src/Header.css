@@ -25,6 +25,12 @@
 .heading--site {
   margin-bottom: 5px;
 }
+.message {
+  max-width: 420px;
+}
+.heading--message {
+  margin: 5px 0 0;
+}
 .options {
   margin-right: 10px;
   justify-content: space-between;
@@ -69,4 +75,42 @@
 }
 .legend__label {
   font-size: 14px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 320px) {
+  .header__items {
+    flex-direction: column;
+  }
+  .logo {
+    margin-left: 0;
+    margin-bottom: 10px;
+  }
+  .options {
+    margin-right: 0;
+  }
+}
+@media (max-width: 740px) {
+  .message {
+    max-width: 300px;
+  }
+}
+@media (max-width: 620px) {
+  .message {
+    max-width: 200px;
+  }
+}
+@media (max-width: 530px) {
+  .message {
+    max-width: 150px;
+  }
+  .message h2 {
+    font-size: 14px;
+  }
+}
+@media (max-width: 480px) {
+  .message {
+    display: none !important;
+  }
 }
