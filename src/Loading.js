@@ -5,7 +5,6 @@ import './Loading.css';
 const Loading = () => (
   <div className="loading__text">
     <h3>Fetching live data and preparing it.</h3>
-    <h4><em>Each number has a human story behind it!</em></h4>
     <p className="loading__option">
       <b>Once the loading is done</b>:
     </p>

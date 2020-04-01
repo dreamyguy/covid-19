@@ -150,6 +150,9 @@ class Header extends Component {
                 </div>
               </div>
             </div>
+            <div className="message display-flex flex-direction-column">
+              <h2 className="heading--message">There's a human story behind every number.</h2>
+            </div>
             <div className="options display-flex">
               <button className={`option option--search${showSearch ? ' is-active' : ''}`} onClick={this.handleShowSearch.bind(this)}>
                 {showSearch
