@@ -1,10 +1,9 @@
 import React from 'react';
-import Emoji from 'react-emojis';
 import './Footer.css';
 
 const Footer = () => (
   <footer>
-    Brought to you by &nbsp;<Emoji emoji="man-technologist" lineHeight="1.2"/>&nbsp;<a className="link" href="http://sidhree.com">Wallace Sidhrée</a>
+    Developed by&nbsp;<a className="link" href="https://github.com/dreamyguy/">Wallace Sidhrée</a>
   </footer>
 );
 
