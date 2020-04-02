@@ -32,6 +32,7 @@ class Icon extends Component {
     super(props)
     this.state = {}
   }
+
   render() {
     const {
       classes = '', // accepts CSS classNames as string
@@ -45,7 +46,7 @@ class Icon extends Component {
         console.error(`[Icon]: You attempted to pass a color that is not supported: (${color}) to the icon: (${icon}). The only options are 'white' or 'red'. We applied the fallback/default color.`);
       }
       return (
-        <span className={`icon icon__${icon}${theColor ? `--${theColor}` : ''}${classes ? ' ' + classes : ''}`} style={{ height: `${size}px`, width: `${size}px`, minWidth: `${size}px` }} />
+        <span className={`icon icon__${icon}${theColor ? `--${theColor}` : ''}${classes ? ` ${classes}` : ''}`} style={{ height: `${size}px`, width: `${size}px`, minWidth: `${size}px` }} />
       );
     }
     console.error(`[Icon]: You attempted to pass an icon name that is not supported: (${icon}). See 'Icon.js' line 5 for options.`);

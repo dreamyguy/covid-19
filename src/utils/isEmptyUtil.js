@@ -6,6 +6,7 @@ export function isEmptyObject (verifyObject) {
   if (process.env.NODE_ENV !== 'test') {
     console.error(`[isEmptyObject]: The object being verified is not an object: ${verifyObject}`);
   }
+  return false;
 }
 
 // Check if object is NOT empty
@@ -16,6 +17,7 @@ export function isNotEmptyObject (verifyObject) {
   if (process.env.NODE_ENV !== 'test') {
     console.error(`[isNotEmptyObject]: The object being verified is not an object: ${verifyObject}`);
   }
+  return false;
 }
 
 // Check if array is empty or not
@@ -26,6 +28,7 @@ export function isEmptyArray (verifyArray) {
   if (process.env.NODE_ENV !== 'test') {
     console.error(`[isEmptyArray]: The array being verified is not an array: ${verifyArray}`);
   }
+  return false;
 }
 
 // Check if array is NOT empty
@@ -36,4 +39,5 @@ export function isNotEmptyArray (verifyArray) {
   if (process.env.NODE_ENV !== 'test') {
     console.error(`[isNotEmptyArray]: The array being verified is not an array: ${verifyArray}`);
   }
+  return false;
 }

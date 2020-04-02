@@ -4,7 +4,8 @@ import uuid from 'uuid/v4'
 import Header from './Header';
 import Footer from './Footer';
 import Loading from './Loading';
-import containsString, {
+import {
+  containsString,
   enrichCountriesStats,
   getData,
   globalStats,
@@ -47,7 +48,7 @@ const renderCountry = (country, rank) => {
     deathsPercent,
   } = country;
   return (
-    <li key={uuid()} className="country" >
+    <li key={uuid()} className="country">
       <div>
         <h2 className="heading--country">{rank}. {countryName}</h2>
         <div className="display-flex stats">
@@ -151,6 +152,7 @@ const App = () => {
           }
           return run();
         }
+        return null;
       })
       .catch(err => {
         setState({
@@ -186,34 +188,37 @@ const App = () => {
         sortBy={sortBy}
       />
       <div className="app align-center" style={{ paddingTop: headerTopPadding }}>
-        {loading &&
-          <Loading />
-        }
-        {!loading && stats && isNotEmptyArray(stats) &&
-          <ul className="countries">
-            {isSearching && searchValue
-              ?
-                <>
-                  {renderStatsSearch({
-                    stats: sortCountriesBy({
-                      countries: stats,
-                      sortBy,
-                      mode: 'desc',
-                    }),
-                    isSearching,
-                    searchValue
-                  })}
-                </>
-              :
-                <>
-                  {renderStats(sortCountriesBy({
-                    countries: stats,
-                    sortBy,
-                    mode: 'desc',
-                  }))}
-                </>
-            }
-          </ul>
+        {loading
+          ?
+            <Loading />
+          :
+            stats && isNotEmptyArray(stats) && (
+              <ul className="countries">
+                {isSearching && searchValue
+                  ? (
+                    <>
+                      {renderStatsSearch({
+                        stats: sortCountriesBy({
+                          countries: stats,
+                          sortBy,
+                          mode: 'desc',
+                        }),
+                        isSearching,
+                        searchValue
+                      })}
+                    </>
+                  ) : (
+                    <>
+                      {renderStats(sortCountriesBy({
+                        countries: stats,
+                        sortBy,
+                        mode: 'desc',
+                      }))}
+                    </>
+                  )
+                }
+              </ul>
+            )
         }
       </div>
       <Footer />

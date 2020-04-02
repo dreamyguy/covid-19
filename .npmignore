@@ -2,8 +2,9 @@
 
 # production
 /build
-/web/build
-/dist
+/bin
+/lib
+/public
 
 # cache
 .scssc
@@ -24,8 +25,20 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# environments
+# development mode
+.babelrc
+.editorconfig
 .env
+.env.*
+.eslintignore
+.eslintrc.js
+.nvmrc
+.prettierrc
+.travis.yml
+.vscode
+/src
+TODO.md
+webpack.config.*
 
 # misc
 _ignore
@@ -36,3 +49,6 @@ _ignore
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# documentation
+/docs

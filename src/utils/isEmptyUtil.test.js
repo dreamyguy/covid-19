@@ -15,17 +15,17 @@ describe('isEmpty', () => {
       const testObject = { user: 'Getting tested' };
       expect(isEmptyObject(testObject)).toEqual(false);
     })
-    it('should return undefined if what is passed to the util is a non-empty array of objects', () => {
+    it('should return false if what is passed to the util is a non-empty array of objects', () => {
       const testObject = [{keya: 'lol', keyb: 'foo'}, {keya: 'yup', keyb: 'nay'}];
-      expect(isEmptyObject(testObject)).toEqual(undefined);
+      expect(isEmptyObject(testObject)).toEqual(false);
     })
-    it('should return undefined if what is passed to the util is null', () => {
+    it('should return false if what is passed to the util is null', () => {
       const testObject = null;
-      expect(isEmptyObject(testObject)).toEqual(undefined);
+      expect(isEmptyObject(testObject)).toEqual(false);
     })
-    it('should return undefined if what is passed to the util is a string', () => {
+    it('should return false if what is passed to the util is a string', () => {
       const testObject = 'lol';
-      expect(isEmptyObject(testObject)).toEqual(undefined);
+      expect(isEmptyObject(testObject)).toEqual(false);
     })
   })
   describe('isNotEmptyObject', () => {
@@ -37,17 +37,17 @@ describe('isEmpty', () => {
       const testObject = {};
       expect(isNotEmptyObject(testObject)).toEqual(false);
     })
-    it('should return undefined if what is passed to the util is a non-empty array of objects', () => {
+    it('should return false if what is passed to the util is a non-empty array of objects', () => {
       const testObject = [{keya: 'lol', keyb: 'foo'}, {keya: 'yup', keyb: 'nay'}];
-      expect(isNotEmptyObject(testObject)).toEqual(undefined);
+      expect(isNotEmptyObject(testObject)).toEqual(false);
     })
-    it('should return undefined if what is passed to the util is null', () => {
+    it('should return false if what is passed to the util is null', () => {
       const testObject = null;
-      expect(isNotEmptyObject(testObject)).toEqual(undefined);
+      expect(isNotEmptyObject(testObject)).toEqual(false);
     })
-    it('should return undefined if what is passed to the util is a string', () => {
+    it('should return false if what is passed to the util is a string', () => {
       const testObject = 'lol';
-      expect(isNotEmptyObject(testObject)).toEqual(undefined);
+      expect(isNotEmptyObject(testObject)).toEqual(false);
     })
   })
   describe('isEmptyArray', () => {
@@ -63,17 +63,17 @@ describe('isEmpty', () => {
       const testArray = [{keya: 'lol', keyb: 'foo'}, {keya: 'yup', keyb: 'nay'}];
       expect(isEmptyArray(testArray)).toEqual(false);
     })
-    it('should return undefined if what is passed to the util is an empty object', () => {
+    it('should return false if what is passed to the util is an empty object', () => {
       const testArray = {};
-      expect(isEmptyArray(testArray)).toEqual(undefined);
+      expect(isEmptyArray(testArray)).toEqual(false);
     })
-    it('should return undefined if what is passed to the util is null', () => {
+    it('should return false if what is passed to the util is null', () => {
       const testArray = null;
-      expect(isEmptyArray(testArray)).toEqual(undefined);
+      expect(isEmptyArray(testArray)).toEqual(false);
     })
-    it('should return undefined if what is passed to the util is a string', () => {
+    it('should return false if what is passed to the util is a string', () => {
       const testArray = 'lol';
-      expect(isEmptyArray(testArray)).toEqual(undefined);
+      expect(isEmptyArray(testArray)).toEqual(false);
     })
   })
   describe('isNotEmptyArray', () => {
@@ -89,17 +89,17 @@ describe('isEmpty', () => {
       const testArray = [{keya: 'lol', keyb: 'foo'}, {keya: 'yup', keyb: 'nay'}];
       expect(isNotEmptyArray(testArray)).toEqual(true);
     })
-    it('should return undefined if what is passed to the util is an empty object', () => {
+    it('should return false if what is passed to the util is an empty object', () => {
       const testArray = {};
-      expect(isNotEmptyArray(testArray)).toEqual(undefined);
+      expect(isNotEmptyArray(testArray)).toEqual(false);
     })
-    it('should return undefined if what is passed to the util is null', () => {
+    it('should return false if what is passed to the util is null', () => {
       const testArray = null;
-      expect(isNotEmptyArray(testArray)).toEqual(undefined);
+      expect(isNotEmptyArray(testArray)).toEqual(false);
     })
-    it('should return undefined if what is passed to the util is a string', () => {
+    it('should return false if what is passed to the util is a string', () => {
       const testArray = 'lol';
-      expect(isNotEmptyArray(testArray)).toEqual(undefined);
+      expect(isNotEmptyArray(testArray)).toEqual(false);
     })
   })
 });

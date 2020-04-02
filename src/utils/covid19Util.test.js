@@ -1,4 +1,5 @@
-import containsString, {
+import {
+  containsString,
   getCountries,
   globalStats,
   mergeCountries,

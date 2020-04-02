@@ -138,7 +138,7 @@ export const countriesCSVOutput = [
 ];
 
 export const countriesCSVOutputFiltered = [
-  { country: 'Thailand', value: 599 }, 
+  { country: 'Thailand', value: 599 },
   { country: 'Japan', value: 1086 }
 ];
 
@@ -452,7 +452,7 @@ export const mergedCures = [
 ];
 
 export const mergeCountriesStatsOutput = [
-  { country: 'Thailand', cases: 599, cures: 44, deaths: 1 }, 
+  { country: 'Thailand', cases: 599, cures: 44, deaths: 1 },
   { country: 'Japan', deaths: 40, cures: 235, cases: 1086 },
   { country: 'Singapore', deaths: 2, cures: 144, cases: 455 },
   { country: 'Nepal', deaths: 0, cures: 1, cases: 2 },

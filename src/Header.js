@@ -14,15 +14,24 @@ class Header extends Component {
     };
     this.headerContentRef = React.createRef();
   }
+
   componentDidUpdate(prevProps, prevState) {
+    const {
+      headerHeight,
+    } = this.props;
+    const {
+      showSearch,
+      showSettings,
+    } = this.state;
     if (
-      this.props.headerHeight !== prevProps.headerHeight ||
-      this.state.showSearch !== prevState.showSearch ||
-      this.state.showSettings !== prevState.showSettings
+      headerHeight !== prevProps.headerHeight ||
+      showSearch !== prevState.showSearch ||
+      showSettings !== prevState.showSettings
     ) {
       this.getHeaderRefHeight()
     }
   }
+
   setHeaderIsExpanded(value, mode) {
     const {
       handleHeaderIsExpanded,
@@ -47,6 +56,7 @@ class Header extends Component {
       handleHeaderIsExpanded(false);
     }
   }
+
   getHeaderRefHeight() {
     const {
       handleHeaderHeight,
@@ -58,6 +68,7 @@ class Header extends Component {
     )
     handleHeaderHeight(finalHeaderHeight);
   }
+
   handleShowSearch() {
     const {
       showSearch,
@@ -68,6 +79,7 @@ class Header extends Component {
     this.setHeaderIsExpanded(!showSearch, 'search');
     this.getHeaderRefHeight('search');
   };
+
   handleShowSettings() {
     const {
       showSettings,
@@ -78,11 +90,13 @@ class Header extends Component {
     this.setHeaderIsExpanded(!showSettings, 'settings');
     this.getHeaderRefHeight('settings');
   };
+
   handleSearch(value) {
     const { handleIsSearching, handleSearchValue } = this.props;
     handleIsSearching(true);
     handleSearchValue(value);
   };
+
   render() {
     const {
       loading,
@@ -157,27 +171,28 @@ class Header extends Component {
               <button className={`option option--search${showSearch ? ' is-active' : ''}`} onClick={this.handleShowSearch.bind(this)}>
                 {showSearch
                   ?
-                    <Icon icon="search" color="white" size="24"/>
+                    <Icon icon="search" color="white" size="24" />
                   :
-                    <Icon icon="search" size="24"/>
+                    <Icon icon="search" size="24" />
                 }
               </button>
               <button className={`option option--settings${showSettings ? ' is-active' : ''}`} onClick={this.handleShowSettings.bind(this)}>
                 {showSettings
                   ?
-                    <Icon icon="filter" color="white" size="24"/>
+                    <Icon icon="filter" color="white" size="24" />
                   :
-                    <Icon icon="filter" size="24"/>
+                    <Icon icon="filter" size="24" />
                 }
               </button>
             </div>
           </div>
-          {showSettings &&
+          {showSettings && (
             <Dropdown
               name="dropdown--sortby"
               classes="dropdown--sortby"
               label="Sort by:"
-              labelToLeft={true}
+              // eslint-disable-next-line react/jsx-boolean-value
+              labelPlacement="left"
               selectedvalue={sortBy}
               disabled={loading}
               options={options}
@@ -186,8 +201,8 @@ class Header extends Component {
                 handleSortBy(e.target.value)
               }}
             />
-          }
-          {showSearch &&
+          )}
+          {showSearch && (
             <Search
               classes="search--country"
               value={searchValue}
@@ -196,7 +211,7 @@ class Header extends Component {
                 this.handleSearch(value)
               }}
             />
-          }
+          )}
         </div>
       </div>
     );

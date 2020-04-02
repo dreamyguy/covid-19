@@ -11,9 +11,9 @@
 */
 
 import React, { Component } from 'react';
+import uuidv4 from 'uuid/v4';
 import './Dropdown.css'
 import Icon from './Icon'
-import uuidv4 from 'uuid/v4';
 
 class Dropdown extends Component {
   renderDropDown() {
@@ -43,36 +43,39 @@ class Dropdown extends Component {
       </select>
     )
   }
+
   renderLabel() {
     const {
       label = '',
     } = this.props;
     return (
       <>
-        {label &&
+        {label && (
           <span className="dropdown__label">
             <em>{label}</em>
           </span>
-        }
+        )}
         {this.renderDropDown()}
-        <Icon classes="dropdown__icon" icon="chevron" size="12"/>
+        <Icon classes="dropdown__icon" icon="chevron" size="12" />
       </>
     );
   }
+
   render() {
     const {
       classes = '', // accepts CSS classNames as string
-      labelToLeft,
+      labelPlacement,
       size = ''
     } = this.props;
     return (
-      <div className={`${size ? `dropdown--${size}` : ''}${classes ? ' ' + classes : ''}`}>
+      <div className={`${size ? `dropdown--${size}` : ''}${classes ? ` ${classes}` : ''}`}>
         <label className="dropdown">
-          {labelToLeft
-            ?
+          {labelPlacement === 'left'
+            ? (
               <div className="dropdown__flex">
                 {this.renderLabel()}
               </div>
+            )
             :
               this.renderLabel()
           }

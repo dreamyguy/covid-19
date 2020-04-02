@@ -37,18 +37,18 @@ class Search extends Component {
       showClear,
     } = this.state;
     return (
-      <div className={`search${classes ? ' ' + classes : ''}`}>
-        <label htmlFor="search" >
-          {title &&
+      <div className={`search${classes ? ` ${classes}` : ''}`}>
+        <label htmlFor="search">
+          {title && (
             <span className="search__label">
               <em>{title}</em>
             </span>
-          }
+          )}
           <input
             id={uuidv4()}
             className="search__input"
             autoComplete="off"
-            value={value ? value : inputValue}
+            value={value || inputValue}
             type={type}
             placeholder={placeholder}
             onChange={(e) => {
@@ -60,23 +60,27 @@ class Search extends Component {
             }}
           />
           {icon &&
-            <Icon classes="search__icon-search" icon={icon} size="16"/>
+            <Icon classes="search__icon-search" icon={icon} size="16" />
           }
-          {showClear &&
-          <div
-            className="search__icon-close"
-            onClick={() => {
-              onChangeHandler('')
-              this.setState({
-                showClear: false,
-                inputValue: ''
-              })
-            }}>
-            <Icon
-              icon="close"
-              size="12"
-            />
-          </div>
+          {showClear && (
+            <div
+              className="search__icon-close"
+              role="button"
+              tabIndex={0}
+              onClick={() => {
+                onChangeHandler('')
+                this.setState({
+                  showClear: false,
+                  inputValue: ''
+                })
+              }}
+            >
+              <Icon
+                icon="close"
+                size="12"
+              />
+            </div>
+          )
           }
         </label>
       </div>

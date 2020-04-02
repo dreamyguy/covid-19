@@ -1,16 +1,7 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-unused-expressions */
 import csvtojsonV2 from 'csvtojson';
 import { isNotEmptyArray } from "./isEmptyUtil";
-
-export const getCountries = countries => {
-  const allCountries = [];
-  countries.forEach(c => {
-    allCountries.push({
-      country: c["Country/Region"],
-      value: c[Object.keys(c)[Object.keys(c).length - 1]],
-    });
-  });
-  return mergeCountries(allCountries);
-};
 
 export const thousandify = number => Number(number).toLocaleString();
 
@@ -27,8 +18,6 @@ export const containsString = (string, substring) => {
   return false;
 }
 
-export default containsString;
-
 export const sortCountriesBy = ({ countries, sortBy, mode }) => {
   if (
     countries &&
@@ -37,8 +26,8 @@ export const sortCountriesBy = ({ countries, sortBy, mode }) => {
     if (sortBy === 'country') {
       // 'country' is a string, so it needs special treatment
       countries.sort((a, b) => {
-        var countryA = a.country.toLowerCase();
-        var countryB = b.country.toLowerCase();
+        const countryA = a.country.toLowerCase();
+        const countryB = b.country.toLowerCase();
         if (countryA < countryB) {
           return -1;
         }
@@ -50,6 +39,7 @@ export const sortCountriesBy = ({ countries, sortBy, mode }) => {
       });
     } else {
       // Only dealing with numbers from now on
+      // eslint-disable-next-line no-lonely-if
       if (mode === 'desc') {
         countries.sort((a, b) => b[sortBy] - a[sortBy]);
       } else {
@@ -61,40 +51,51 @@ export const sortCountriesBy = ({ countries, sortBy, mode }) => {
   return console.log(`[sortCountriesBy]: 'countries' (${countries}) is not an array or is empty`);
 }
 
-export const parseCSV = (data, type) => csvtojsonV2({
-    output: "json"
-  })
-  .fromString(data)
-  .then(
-    result => getCountries(result)
-  );
-
-export const getData = (data, type) => parseCSV(data, type);
-
 export const mergeCountries = countries => {
   const output = [];
   countries.forEach(c => {
     const existing = output.filter(f => f.country === c.country);
     if (existing.length) {
       const existingIndex = output.indexOf(existing[0]);
-      output[existingIndex].value = parseInt(output[existingIndex].value) + parseInt(c.value);
+      output[existingIndex].value = parseInt(output[existingIndex].value, 10) + parseInt(c.value, 10);
     } else {
-      c.value = parseInt(c.value);
+      c.value = parseInt(c.value, 10);
       output.push(c);
     }
   });
   return output;
 };
 
+export const getCountries = countries => {
+  const allCountries = [];
+  countries.forEach(c => {
+    allCountries.push({
+      country: c["Country/Region"],
+      value: c[Object.keys(c)[Object.keys(c).length - 1]],
+    });
+  });
+  return mergeCountries(allCountries);
+};
+
+export const parseCSV = data => csvtojsonV2({
+  output: "json"
+})
+.fromString(data)
+.then(
+  result => getCountries(result)
+);
+
+export const getData = (data, type) => parseCSV(data, type);
+
 export const mergeCountriesReduce = countries => {
   return countries.reduce((o, cur) => {
     const occurs = o.reduce((n, item, i) => item.country === cur.country ? i : n, -1);
     if (occurs >= 0) {
-      o[occurs].value = parseInt(o[occurs].value) + parseInt(cur.value);
+      o[occurs].value = parseInt(o[occurs].value, 10) + parseInt(cur.value, 10);
     } else {
       const obj = {
         country: cur.country,
-        value: parseInt(cur.value)
+        value: parseInt(cur.value, 10)
       };
       o = o.concat([obj]);
     }
@@ -155,7 +156,7 @@ export const mergeCountriesStats = ({ cases, cures, deaths }) => {
 export const enrichCountriesStats = countries => {
   const output = [];
   countries && isNotEmptyArray(countries) && countries.forEach(co => {
-    const { country, cases, cures, deaths/*, population*/ } = co;
+    const { country, cases, cures, deaths/* , population */ } = co;
     const sick = cases - (cures + deaths);
     output.push({
       country,
