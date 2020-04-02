@@ -1,6 +1,6 @@
 {
-  "name": "covid-19-stats",
-  "version": "0.1.0",
+  "name": "covid-19",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
@@ -11,7 +11,6 @@
     "fork-me-on-github": "^1.0.6",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-emojis": "^1.0.6",
     "react-scripts": "3.4.1"
   },
   "scripts": {
