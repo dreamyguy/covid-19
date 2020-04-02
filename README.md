@@ -18,6 +18,10 @@ Developing this application and following the numbers up close was disheartening
 
 My sister passed away on the first day of the lock-down here in Norway, not even a month ago. I'm still grieving, and feel strongly for all those who have lost their dear ones for COVID-19.
 
+## This project is live at
+
+https://dreamyguy.github.io/covid-19/
+
 ## Goals
 
 **1. Show COVID-19 stats, per country**
