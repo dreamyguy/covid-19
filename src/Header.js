@@ -177,7 +177,7 @@ class Header extends Component {
               name="dropdown--sortby"
               classes="dropdown--sortby"
               label="Sort by:"
-              labelToLeft
+              labelToLeft={true}
               selectedvalue={sortBy}
               disabled={loading}
               options={options}
