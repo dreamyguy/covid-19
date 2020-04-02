@@ -1,8 +1,8 @@
-![COVID-19](https://raw.githubusercontent.com/dreamyguy/covid-19/master/docs/covid-19-logo-github-full-width.png "COVID-19 visualise latest stats for each country")
+![COVID-19](https://raw.githubusercontent.com/dreamyguy/covid-19/master/docs/covid-19-logo-github-full-width.png "COVID-19 visualisation of latest stats for each country")
 
 # 🦠 COVID-19
 
-> COVID-19 visualise latest stats for each country
+> COVID-19 visualisation of latest stats for each country
 
 [![Build Status](https://travis-ci.com/dreamyguy/covid-19.svg?branch=master)](https://travis-ci.com/dreamyguy/covid-19) [![Node Version](https://img.shields.io/badge/node-v12.14.0-brightgreen.svg)](https://github.com/nodejs/node/releases/tag/v12.14.0) [![MIT Licence](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/dreamyguy/covid-19/blob/master/LICENSE)
 
