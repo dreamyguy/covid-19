@@ -20,7 +20,7 @@ My sister passed away on the first day of the lock-down here in Norway, not even
 
 ## This project is live at
 
-https://dreamyguy.github.io/covid-19/
+https://covid19lateststats.com
 
 ## Goals
 
